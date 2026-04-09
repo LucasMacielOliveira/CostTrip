@@ -1,11 +1,13 @@
 package com.costtrip.api.dto;
 
+import com.costtrip.api.enums.TravelProfile;
+
 public class TripSimulationResponse {
 
     private String destination;
     private int days;
     private int travelers;
-    private String profile;
+    private TravelProfile profile;
     private double estimatedTotal;
 
     public String getDestination() {
@@ -32,11 +34,11 @@ public class TripSimulationResponse {
         this.travelers = travelers;
     }
 
-    public String getProfile() {
+    public TravelProfile getProfile() {
         return profile;
     }
 
-    public void setProfile(String profile) {
+    public void setProfile(TravelProfile profile) {
         this.profile = profile;
     }
 

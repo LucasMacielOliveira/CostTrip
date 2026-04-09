@@ -10,10 +10,9 @@ public class TripSimulationService {
     public TripSimulationResponse simulate(TripSimulationRequest request) {
 
         double basePerDay = switch (request.getProfile()) {
-            case "ECONOMICO" -> 200;
-            case "CONFORTO" -> 400;
-            case "LUXO" -> 800;
-            default -> 300;
+            case ECONOMICO -> 200;
+            case CONFORTO -> 400;
+            case LUXO -> 800;
         };
 
         double total = basePerDay * request.getDays() * request.getTravelers();

@@ -1,5 +1,6 @@
 package com.costtrip.api.dto;
 
+import com.costtrip.api.enums.TravelProfile;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -15,8 +16,8 @@ public class TripSimulationRequest {
     @Min(value = 1, message = "Travelers must be at least 1")
     private int travelers;
 
-    @NotBlank(message = "Profile is required")
-    private String profile;
+    @NotNull(message = "Profile is required")
+    private TravelProfile profile;
 
     public String getDestination() {
         return destination;
@@ -42,11 +43,11 @@ public class TripSimulationRequest {
         this.travelers = travelers;
     }
 
-    public String getProfile() {
+    public TravelProfile getProfile() {
         return profile;
     }
 
-    public void setProfile(String profile) {
+    public void setProfile(TravelProfile profile) {
         this.profile = profile;
     }
 }
