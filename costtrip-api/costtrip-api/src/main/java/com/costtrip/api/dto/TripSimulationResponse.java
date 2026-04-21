@@ -21,6 +21,9 @@ public class TripSimulationResponse {
 
     private String currency;
     private String recommendation;
+    private String destinationCurrency;
+    private double exchangeRateUsed;
+
 
     public String getDestination() {
         return destination;
@@ -132,5 +135,21 @@ public class TripSimulationResponse {
 
     public void setRecommendation(String recommendation) {
         this.recommendation = recommendation;
+    }
+
+    public String getDestinationCurrency() {
+        return destinationCurrency;
+    }
+
+    public void setDestinationCurrency(String destinationCurrency) {
+        this.destinationCurrency = destinationCurrency;
+    }
+
+    public double getExchangeRateUsed() {
+        return exchangeRateUsed;
+    }
+
+    public void setExchangeRateUsed(double exchangeRateUsed) {
+        this.exchangeRateUsed = exchangeRateUsed;
     }
 }

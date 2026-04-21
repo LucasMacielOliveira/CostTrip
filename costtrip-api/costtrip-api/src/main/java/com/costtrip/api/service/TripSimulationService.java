@@ -6,6 +6,7 @@ import com.costtrip.api.model.SimulationHistory;
 import com.costtrip.api.repository.SimulationHistoryRepository;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -13,14 +14,23 @@ import java.util.List;
 public class TripSimulationService {
 
     private final SimulationHistoryRepository simulationHistoryRepository;
+    private final DestinationCurrencyMapper destinationCurrencyMapper;
+    private final ExchangeRateService exchangeRateService;
 
-    public TripSimulationService(SimulationHistoryRepository simulationHistoryRepository) {
+    public TripSimulationService(SimulationHistoryRepository simulationHistoryRepository,
+                                 DestinationCurrencyMapper destinationCurrencyMapper,
+                                 ExchangeRateService exchangeRateService) {
         this.simulationHistoryRepository = simulationHistoryRepository;
+        this.destinationCurrencyMapper = destinationCurrencyMapper;
+        this.exchangeRateService = exchangeRateService;
     }
 
     public TripSimulationResponse simulate(TripSimulationRequest request) {
 
         ProfileCosts profileCosts = getProfileCosts(request);
+
+        String destinationCurrency = destinationCurrencyMapper.getCurrencyByDestination(request.getDestination());
+        BigDecimal exchangeRate = exchangeRateService.getExchangeRate(destinationCurrency);
 
         double flightCost = profileCosts.getFlightBase() * request.getTravelers();
         double lodgingCost = profileCosts.getLodgingPerNight() * request.getDays();
@@ -44,6 +54,8 @@ public class TripSimulationService {
         response.setCostPerTraveler(total / request.getTravelers());
         response.setCostPerDay(total / request.getDays());
         response.setCurrency("BRL");
+        response.setDestinationCurrency(destinationCurrency);
+        response.setExchangeRateUsed(exchangeRate.doubleValue());
         response.setRecommendation(
                 buildRecommendation(
                         total / request.getDays(),
