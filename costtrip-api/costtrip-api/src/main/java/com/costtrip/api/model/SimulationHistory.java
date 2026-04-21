@@ -1,12 +1,23 @@
-package com.costtrip.api.dto;
+package com.costtrip.api.model;
 
 import com.costtrip.api.enums.TravelProfile;
+import jakarta.persistence.*;
 
-public class TripSimulationResponse {
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "simulation_history")
+public class SimulationHistory {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String destination;
     private int days;
     private int travelers;
+
+    @Enumerated(EnumType.STRING)
     private TravelProfile profile;
 
     private double flightCost;
@@ -14,13 +25,18 @@ public class TripSimulationResponse {
     private double foodCost;
     private double localTransportCost;
     private double extraCost;
-
     private double estimatedTotal;
     private double costPerTraveler;
     private double costPerDay;
 
     private String currency;
     private String recommendation;
+
+    private LocalDateTime createdAt;
+
+    public Long getId() {
+        return id;
+    }
 
     public String getDestination() {
         return destination;
@@ -132,5 +148,13 @@ public class TripSimulationResponse {
 
     public void setRecommendation(String recommendation) {
         this.recommendation = recommendation;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 }

@@ -7,16 +7,17 @@ import jakarta.validation.constraints.NotNull;
 
 public class TripSimulationRequest {
 
-    @NotBlank(message = "Destination is required")
+
+    @NotBlank(message = "Destino é obrigatório")
     private String destination;
 
-    @Min(value = 1, message = "Days must be at least 1")
+    @Min(value = 1, message = "Dias deve ser no mínimo 1")
     private int days;
 
-    @Min(value = 1, message = "Travelers must be at least 1")
+    @Min(value = 1, message = "Viajantes deve ser no mínimo 1")
     private int travelers;
 
-    @NotNull(message = "Profile is required")
+    @NotNull(message = "Perfil é obrigatório")
     private TravelProfile profile;
 
     public String getDestination() {
@@ -50,4 +51,6 @@ public class TripSimulationRequest {
     public void setProfile(TravelProfile profile) {
         this.profile = profile;
     }
+
 }
+
