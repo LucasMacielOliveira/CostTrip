@@ -150,4 +150,58 @@ public class TripSimulationService {
             return extraBase;
         }
     }
-}
+    public static class LocalCosts{
+        private double foodPerDayLocal;
+        private double transportPerDayLocal;
+        private double extraBaseLocal;
+
+        public LocalCosts() {
+        }
+
+        public double getFoodPerDayLocal() {
+            return foodPerDayLocal;
+        }
+
+        public double getTransportPerDayLocal () {
+            return transportPerDayLocal;
+        }
+
+        public double getExtraBaseLocal () {
+            return extraBaseLocal;
+        }
+
+    }
+    private LocalCosts getLocalCosts(TripSimulationRequest request) {
+        return switch (request.getProfile()) {
+            case ECONOMICO -> {
+                LocalCosts costs = new LocalCosts();
+                costs.foodPerDayLocal = 2000;
+                costs.transportPerDayLocal = 1200;
+                costs.extraBaseLocal = 500;
+                yield costs;
+            }
+            case CONFORTO -> {
+                LocalCosts costs = new LocalCosts();
+                costs.foodPerDayLocal = 3500;
+                costs.transportPerDayLocal = 2000;
+                costs.extraBaseLocal = 800;
+                yield costs;
+            }
+            case LUXO -> {
+                LocalCosts costs = new LocalCosts();
+                costs.foodPerDayLocal = 5000;
+                costs.transportPerDayLocal = 3500;
+                costs.extraBaseLocal = 1500;
+                yield costs;
+            }
+
+        };
+    };
+
+
+    }
+
+
+
+
+
